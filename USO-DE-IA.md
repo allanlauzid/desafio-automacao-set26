@@ -85,3 +85,16 @@ Os campos marcados como “pendente de informação de Allan” aguardam preench
 - Limitação: o temporizador pode avançar entre a leitura e o clique; o oráculo final continua exigindo valor menor ou igual a 25%.
 - Limitação de ambiente: o aviso CDP 151/Chrome 153 permaneceu sem impedir o cenário.
 - Ponto de Selenium que ainda não domino: pendente de informação de Allan.
+
+## Slide 8 — UI-05
+
+- Pedido à IA: após aprovação do checkpoint, implementar e executar somente o Slide 8.
+- Sugestão ou implementação da IA: cenário Cucumber com Selenium Actions, Page Object, criação controlada de uma ordem não crescente e comparação integral da ordem final lida do DOM.
+- Revisão e compreensão de Allan: pendente de descrição nas palavras de Allan.
+- Ajuste ou teste pessoal de Allan: nenhum informado.
+- Executor do teste: Assistente.
+- `R2-EXEC-024`: Bloqueado por Configuração antes da compilação porque `mvn` não estava disponível no `PATH` do shell.
+- `R2-EXEC-025`: Bloqueado por Ambiente antes da compilação porque a área restrita negou a cópia do novo arquivo `.feature` para `target`.
+- `R2-EXEC-026`: Aprovado com 1 cenário executado, 0 falhas, 0 erros e 0 ignorados. A ordem criada por drag and drop foi `[Six, One, Two, Three, Four, Five]`; a ordem final observada no DOM foi `[One, Two, Three, Four, Five, Six]`.
+- Evidência observável: duas capturas, relatório Cucumber HTML e JSON e relatórios Surefire.
+- Limitação: o caso cobre somente a aba `List`, em Chrome, resolução desktop e uma sequência conhecida; não cobre `Grid`, dispositivos móveis, outros navegadores, acessibilidade ou desempenho.

@@ -42,4 +42,11 @@ public final class NavigationPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//h1[normalize-space()='Progress Bar']")));
     }
+
+    public void openSortable() {
+        click(By.xpath("//div[contains(@class,'card-body')]/h5[normalize-space()='Interactions']"));
+        click(By.xpath("//span[normalize-space()='Sortable']"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//h1[normalize-space()='Sortable']")));
+    }
 }

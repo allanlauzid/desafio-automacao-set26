@@ -8,7 +8,8 @@
 | Slide 6 | Concluído | `fd3920e` |
 | Documentação — mapa de artefatos | Concluído | `596f5fe` |
 | Slide 7 | Concluído | `135bd55` |
-| Melhoria de navegação e reorganização documental | Aguardando commit de Allan | — |
+| Melhoria de navegação e reorganização documental | Concluído | `5309c60` |
+| Slide 8 | Aguardando commit de Allan | — |
 
 Os hashes foram conferidos no histórico local antes da criação deste arquivo. Ao concluir um novo slide, atualize esta tabela somente depois de confirmar o commit real no histórico.
 

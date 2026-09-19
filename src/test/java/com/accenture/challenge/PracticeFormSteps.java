@@ -45,7 +45,7 @@ public class PracticeFormSteps {
     private String newWindow;
     private Set<String> originalHandles;
 
-    @Before("@ui and not @web-tables and not @progress-bar")
+    @Before("@ui and not @web-tables and not @progress-bar and not @sortable")
     public void startBrowser(Scenario scenario) {
         this.scenario = scenario;
         ChromeOptions options = new ChromeOptions();
@@ -59,7 +59,7 @@ public class PracticeFormSteps {
         browserWindows = new BrowserWindowsPage(driver);
     }
 
-    @After("@ui and not @web-tables and not @progress-bar")
+    @After("@ui and not @web-tables and not @progress-bar and not @sortable")
     public void stopBrowser(Scenario scenario) {
         if (driver != null) {
             if (scenario.isFailed()) {
