@@ -35,4 +35,11 @@ public final class NavigationPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//h1[normalize-space()='Web Tables']")));
     }
+
+    public void openProgressBar() {
+        click(By.xpath("//div[contains(@class,'card-body')]/h5[normalize-space()='Widgets']"));
+        click(By.xpath("//span[normalize-space()='Progress Bar']"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//h1[normalize-space()='Progress Bar']")));
+    }
 }

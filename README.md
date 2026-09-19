@@ -63,7 +63,7 @@ mvn -Dtest=BrowserWindowsTest test
 
 Última execução de `UI-02`: `R2-EXEC-012`, Aprovado na primeira tentativa, com 1 cenário, 0 falhas, 0 erros e 0 ignorados. A nova janela é obtida pela diferença entre os conjuntos de identificadores, sem depender de posição fixa.
 
-## Checkpoint atual — Slide 6
+## Checkpoint concluído — Slide 6
 
 O Slide 6 contém o requisito `UI-03` e o bônus `UI-BONUS-01`. O requisito cria, confere, edita, confere novamente e exclui o mesmo registro. O bônus cria 12 registros dinâmicos, compara todos e confirma que nenhum permanece após a exclusão.
 
@@ -75,6 +75,18 @@ mvn -Dtest=WebTablesBonusTest test
 Última execução de `UI-03`: `R2-EXEC-020`, Aprovado. A primeira aprovação ocorreu em `R2-EXEC-015`; a regressão confirmou o fluxo depois da alteração compartilhada de exclusão.
 
 Última execução de `UI-BONUS-01`: `R2-EXEC-019`, Aprovado com `DEF-UI-001` registrado. Os 12 registros foram criados e validados, mas o primeiro clique de exclusão removeu todas as 12 linhas adicionadas. A ausência final exigida pelo bônus foi confirmada e os três registros padrão permaneceram intactos.
+
+## Checkpoint concluído — Slide 7
+
+O Slide 7 está representado por `UI-04`: acessar `Widgets > Progress Bar`, iniciar, solicitar a parada antes de 25%, validar o valor estabilizado menor ou igual a 25%, retomar até 100% e resetar para 0%.
+
+```powershell
+mvn "-Dtest=ProgressBarTest" "-Dexecution.id=R2-EXEC-023" test
+```
+
+Na chamada pelo PowerShell, os dois argumentos `-D` foram passados entre aspas para chegarem íntegros ao Maven.
+
+`R2-EXEC-021` permanece Bloqueado por Configuração porque o cenário não iniciou. `R2-EXEC-022` foi Aprovado, mas a revisão do relatório identificou um segundo navegador aberto por sobreposição de hooks. Esse navegador não participou das ações. Depois da correção, `R2-EXEC-023` foi Aprovado com 1 cenário, 0 falhas, 0 erros e 0 ignorados. O clique em `Stop` foi solicitado em 10%, a barra estabilizou em 12%, chegou a 100% e retornou a 0% após o reset.
 
 ## Mapa rápido dos artefatos por slide
 
@@ -88,6 +100,7 @@ Este é o ponto de entrada para localizar a automação, as evidências e os res
 | Slide 5 / `UI-02` | [`05_browser_windows.feature`](src/test/resources/features/05_browser_windows.feature) | [`BrowserWindowsTest.java`](src/test/java/com/accenture/challenge/BrowserWindowsTest.java) | [`PracticeFormSteps.java`](src/test/java/com/accenture/challenge/PracticeFormSteps.java), compartilhado com o Slide 4 | [`BrowserWindowsPage.java`](src/test/java/com/accenture/challenge/ui/BrowserWindowsPage.java) | [`slide-05-browser-windows`](evidencias/slide-05-browser-windows/) | `mvn -Dtest=BrowserWindowsTest test` |
 | Slide 6 / `UI-03` | [`06_web_tables.feature`](src/test/resources/features/06_web_tables.feature) | [`WebTablesRequiredTest.java`](src/test/java/com/accenture/challenge/WebTablesRequiredTest.java) | [`WebTablesSteps.java`](src/test/java/com/accenture/challenge/WebTablesSteps.java) | [`WebTablesPage.java`](src/test/java/com/accenture/challenge/ui/WebTablesPage.java) e [`PersonData.java`](src/test/java/com/accenture/challenge/ui/PersonData.java) | [`slide-06-web-tables`](evidencias/slide-06-web-tables/) e [`DEF-UI-001`](evidencias/slide-06-web-tables/DEF-UI-001-exclusao-em-cascata.md) | `mvn -Dtest=WebTablesRequiredTest test` |
 | Slide 6 / `UI-BONUS-01` | [`06_web_tables.feature`](src/test/resources/features/06_web_tables.feature) | [`WebTablesBonusTest.java`](src/test/java/com/accenture/challenge/WebTablesBonusTest.java) | [`WebTablesSteps.java`](src/test/java/com/accenture/challenge/WebTablesSteps.java) | [`WebTablesPage.java`](src/test/java/com/accenture/challenge/ui/WebTablesPage.java) e [`PersonData.java`](src/test/java/com/accenture/challenge/ui/PersonData.java) | [`R2-EXEC-019`](evidencias/slide-06-web-tables/R2-EXEC-019-automatizada/execucao.md) e [`DEF-UI-001`](evidencias/slide-06-web-tables/DEF-UI-001-exclusao-em-cascata.md) | `mvn -Dtest=WebTablesBonusTest test` |
+| Slide 7 / `UI-04` | [`07_progress_bar.feature`](src/test/resources/features/07_progress_bar.feature) | [`ProgressBarTest.java`](src/test/java/com/accenture/challenge/ProgressBarTest.java) | [`ProgressBarSteps.java`](src/test/java/com/accenture/challenge/ProgressBarSteps.java) | [`ProgressBarPage.java`](src/test/java/com/accenture/challenge/ui/ProgressBarPage.java) | [`R2-EXEC-021`](evidencias/slide-07-progress-bar/R2-EXEC-021-automatizada/execucao.md), [`R2-EXEC-022`](evidencias/slide-07-progress-bar/R2-EXEC-022-automatizada/execucao.md) e [`R2-EXEC-023`](evidencias/slide-07-progress-bar/R2-EXEC-023-automatizada/execucao.md) | `mvn "-Dtest=ProgressBarTest" "-Dexecution.id=R2-EXEC-023" test` |
 
 Componentes compartilhados pelos fluxos de interface: [`BasePage.java`](src/test/java/com/accenture/challenge/ui/BasePage.java) e [`NavigationPage.java`](src/test/java/com/accenture/challenge/ui/NavigationPage.java).
 

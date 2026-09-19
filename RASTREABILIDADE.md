@@ -8,7 +8,7 @@
 | UI-02 | 5 | Exigência | Abrir nova janela, validar a mensagem e fechar a janela | Surge uma janela adicional com `This is a sample page` e ela é fechada | A automação pode validar a janela original ou deixar a nova janela aberta | Implementado | Aprovado | R2-EXEC-012 |
 | UI-03 | 6 | Exigência | Criar, editar e excluir o mesmo registro em Web Tables | O registro próprio reflete cada mudança e não aparece após a exclusão | A exclusão pode atingir outra linha ou a edição pode não persistir | Implementado | Aprovado | R2-EXEC-020 |
 | UI-BONUS-01 | 6 | Bônus | Criar dinamicamente 12 registros com Cucumber e excluir todos | Os 12 registros coexistem antes da exclusão e nenhum permanece ao final | Uma exclusão pode fazer outros registros desaparecerem sem comprovar a exclusão individual | Implementado | Aprovado com DEF-UI-001 | R2-EXEC-019 |
-| UI-04 | 7 | Exigência | Parar antes de 25%, validar valor até 25%, chegar a 100% e resetar | Valores observados atendem cada estado solicitado | O tempo da interface pode fazer a parada ultrapassar o limite | Planejado | Não executado | — |
+| UI-04 | 7 | Exigência | Parar antes de 25%, validar valor até 25%, chegar a 100% e resetar | Valores observados atendem cada estado solicitado | O tempo da interface pode fazer a parada ultrapassar o limite | Implementado | Aprovado | R2-EXEC-023 |
 | UI-05 | 8 | Exigência | Reordenar os elementos com drag and drop | A ordem final observada é crescente | O gesto pode mover o item visualmente sem produzir a ordem esperada | Planejado | Não executado | — |
 
 ## Decisão aprovada para API-01
@@ -120,3 +120,29 @@
 - Ponto de Selenium que ainda não domino: pendente de informação de Allan.
 
 > **Aviso de commit do Slide 6:** revisar o diff, as execuções `R2-EXEC-013` a `R2-EXEC-020`, `DEF-UI-001`, a rastreabilidade e as evidências. Depois da revisão, Allan deve executar pessoalmente um commit exclusivo do slide e o push. Mensagem sugerida: `test(slide-06): automatizar operacoes da Web Tables`.
+
+## Decisão aprovada para UI-04
+
+- Um cenário Cucumber cobre navegação, início, parada, validação do limite, retomada, conclusão e reset.
+- A ação e o oráculo permanecem distintos: o clique é solicitado com uma leitura abaixo de 25% e a aprovação exige valor estabilizado menor ou igual a 25%.
+- O gatilho técnico em 10% cria margem para o avanço ocorrido entre a leitura e o clique; ele não altera o limite exigido pelo slide.
+- O Page Object controla a interface e lê o percentual; as comparações ficam nos steps.
+- Capturas documentam a barra parada, o estado em 100% e o estado depois do reset.
+
+## Registro de uso de IA — checkpoint UI-04
+
+- Pedido à IA: após aprovação do checkpoint, implementar e executar somente o Slide 7.
+- Sugestão ou implementação da IA: cenário Cucumber com Selenium, Page Object, espera com consulta frequente e separação entre o momento da ação e o valor estabilizado.
+- Revisão e compreensão de Allan: pendente de descrição nas palavras de Allan.
+- Ajuste ou teste pessoal de Allan: nenhum informado.
+- Executor do teste: Assistente.
+- `R2-EXEC-021`: Bloqueado por Configuração antes da compilação, pois o Maven recebeu parte do parâmetro de identificação como fase inexistente.
+- `R2-EXEC-022`: Aprovado com 1 cenário executado, 0 falhas, 0 erros e 0 ignorados; parada solicitada em 10%, valor estabilizado em 14%, conclusão em 100% e reset em 0%.
+- A revisão de `R2-EXEC-022` identificou um segundo navegador aberto por sobreposição entre o hook genérico `@ui` e o hook específico `@progress-bar`. Esse navegador não participou das ações nem alterou as verificações.
+- `R2-EXEC-023`: regressão Aprovada depois de restringir o hook genérico; somente um navegador foi iniciado, a parada foi solicitada em 10%, o valor estabilizou em 12%, chegou a 100% e voltou a 0%.
+- Evidência observável: três capturas, relatórios Cucumber e relatórios Surefire.
+- Limitação: o temporizador pode avançar entre a leitura e o clique; o oráculo final continua exigindo valor menor ou igual a 25%.
+- Limitação de ambiente: o aviso CDP 151/Chrome 153 permaneceu sem impedir o cenário.
+- Ponto de Selenium que ainda não domino: pendente de informação de Allan.
+
+> **Aviso de commit do Slide 7:** revisar o diff, `R2-EXEC-021` a `R2-EXEC-023`, a rastreabilidade, o mapa do README e as evidências. Depois da revisão, Allan deve executar pessoalmente um commit exclusivo do slide e o push. Mensagem sugerida: `test(slide-07): automatizar estados da Progress Bar`.
