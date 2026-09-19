@@ -196,4 +196,4 @@ Componentes compartilhados pelos fluxos de interface: [`BasePage.java`](src/test
 
 > **Aviso de checkpoint:** ao concluir cada slide, revisar o diff, a rastreabilidade, o resultado real e as evidências. Depois dessa revisão, parar para que Allan faça pessoalmente o commit e o push. O Assistente não executa esses comandos.
 
-O histórico de execução fica em [`RESULTADOS.md`](RESULTADOS.md), e o estado atual dos casos fica em [`RASTREABILIDADE.md`](RASTREABILIDADE.md). As decisões técnicas ficam em [`docs/decisoes/`](docs/decisoes/), o registro da colaboração com IA em [`USO-DE-IA.md`](USO-DE-IA.md) e os commits confirmados em [`CONTROLE-DE-COMMITS.md`](CONTROLE-DE-COMMITS.md).
+O histórico de execução fica em [`RESULTADOS.md`](RESULTADOS.md), e o estado atual dos casos fica em [`RASTREABILIDADE.md`](RASTREABILIDADE.md). As decisões técnicas ficam em [`docs/decisoes/`](docs/decisoes/), o registro da colaboração com IA em [`USO-DE-IA.md`](USO-DE-IA.md), os commits confirmados em [`CONTROLE-DE-COMMITS.md`](CONTROLE-DE-COMMITS.md) e a síntese falável em [`APRESENTACAO-ENTREVISTA.md`](APRESENTACAO-ENTREVISTA.md).
