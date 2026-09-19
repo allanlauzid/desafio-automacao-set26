@@ -2,6 +2,60 @@
 
 Projeto reconstruído na ordem dos slides do `Desafio_QA (004).pptx`. Cada checkpoint separa a exigência do enunciado, o bônus, os critérios de avaliação e as práticas adicionais.
 
+## Estrutura do projeto
+
+```text
+src/test/
+├── java/com/accenture/challenge/
+│   ├── ApiFlowTest.java                 ← Slide 3 / API-01 (runner)
+│   ├── ApiSteps.java                    ← Slide 3 / API-01 (steps)
+│   ├── UiFlowTest.java                  ← Slide 4 / UI-01 (runner)
+│   ├── PracticeFormSteps.java           ← Slides 4 e 5 / UI-01 e UI-02 (steps compartilhados)
+│   ├── BrowserWindowsTest.java          ← Slide 5 / UI-02 (runner)
+│   ├── WebTablesRequiredTest.java       ← Slide 6 / UI-03 (runner)
+│   ├── WebTablesBonusTest.java          ← Slide 6 / UI-BONUS-01 (runner)
+│   ├── WebTablesSteps.java              ← Slide 6 / UI-03 e UI-BONUS-01 (steps)
+│   ├── ProgressBarTest.java             ← Slide 7 / UI-04 (runner)
+│   ├── ProgressBarSteps.java            ← Slide 7 / UI-04 (steps)
+│   └── ui/
+│       ├── BasePage.java                ← Slides 4 a 7 (base compartilhada)
+│       ├── NavigationPage.java          ← Slides 4 a 7 (navegação compartilhada)
+│       ├── PracticeFormPage.java        ← Slide 4 / UI-01
+│       ├── StudentData.java             ← Slide 4 / UI-01 (dados)
+│       ├── BrowserWindowsPage.java      ← Slide 5 / UI-02
+│       ├── WebTablesPage.java           ← Slide 6 / UI-03 e UI-BONUS-01
+│       ├── PersonData.java              ← Slide 6 / UI-03 e UI-BONUS-01 (dados)
+│       └── ProgressBarPage.java         ← Slide 7 / UI-04
+└── resources/
+    ├── features/
+    │   ├── 03_api.feature              ← Slide 3 / API-01
+    │   ├── 04_practice_form.feature    ← Slide 4 / UI-01
+    │   ├── 05_browser_windows.feature  ← Slide 5 / UI-02
+    │   ├── 06_web_tables.feature       ← Slide 6 / UI-03 e UI-BONUS-01
+    │   └── 07_progress_bar.feature     ← Slide 7 / UI-04
+    └── files/
+        └── practice-form-upload.txt    ← Slide 4 / UI-01 (arquivo de upload)
+
+evidencias/
+├── slide-03-api/                       ← Slide 3 / API-01 e API-PA-01
+├── slide-04-practice-form/             ← Slide 4 / UI-01
+├── slide-05-browser-windows/           ← Slide 5 / UI-02
+├── slide-06-web-tables/                ← Slide 6 / UI-03 e UI-BONUS-01
+└── slide-07-progress-bar/              ← Slide 7 / UI-04
+```
+
+## Convenção de nomes
+
+Os arquivos `.feature` começam com o número do slide, como `07_progress_bar.feature`. Runners, steps e Page Objects recebem nomes relacionados ao fluxo e são ligados explicitamente pelo mapa de artefatos. Uma classe de steps pode atender mais de um fluxo, e um slide pode possuir mais de um runner.
+
+## Ir direto para um slide
+
+- [Slide 3 — API](src/test/resources/features/03_api.feature)
+- [Slide 4 — Practice Form](src/test/resources/features/04_practice_form.feature)
+- [Slide 5 — Browser Windows](src/test/resources/features/05_browser_windows.feature)
+- [Slide 6 — Web Tables](src/test/resources/features/06_web_tables.feature)
+- [Slide 7 — Progress Bar](src/test/resources/features/07_progress_bar.feature)
+
 ## Abordagem de trabalho
 
 Este projeto adota uma abordagem spec-first para automação de testes, inspirada em Spec-Driven Development. Antes de implementar cada requisito, a base de teste é analisada para definir a condição de teste, o risco, os dados, as ações e os resultados esperados. Após a revisão humana do checkpoint, a IA apoia a implementação e executa os testes. A rastreabilidade liga requisito, caso, tentativa de execução e evidência.
@@ -92,15 +146,29 @@ Na chamada pelo PowerShell, os dois argumentos `-D` foram passados entre aspas p
 
 Este é o ponto de entrada para localizar a automação, as evidências e os resultados. `RESULTADOS.md` mantém uma linha por tentativa e aponta para cada `execucao.md`; `RASTREABILIDADE.md` apresenta o estado atual de cada caso.
 
-| Slide / caso | Cenário Cucumber | Runner | Steps | Page Object / dados | Evidências e defeitos | Comando |
-|---|---|---|---|---|---|---|
-| Slide 3 / `API-01` | [`03_api.feature`](src/test/resources/features/03_api.feature) | [`ApiFlowTest.java`](src/test/java/com/accenture/challenge/ApiFlowTest.java) | [`ApiSteps.java`](src/test/java/com/accenture/challenge/ApiSteps.java) | Não se aplica à API | [`slide-03-api`](evidencias/slide-03-api/) | `mvn -Dtest=ApiFlowTest test` |
-| Slide 3 / `API-PA-01` | Mesmo fluxo de `03_api.feature`, executado adicionalmente no Postman | Não se aplica | Não se aplica | Não se aplica | [`R2-EXEC-004`](evidencias/slide-03-api/R2-EXEC-004-manual/execucao.md) e [`R2-EXEC-005`](evidencias/slide-03-api/R2-EXEC-005-manual/execucao.md) | Execução pela interface do Postman |
-| Slide 4 / `UI-01` | [`04_practice_form.feature`](src/test/resources/features/04_practice_form.feature) | [`UiFlowTest.java`](src/test/java/com/accenture/challenge/UiFlowTest.java) | [`PracticeFormSteps.java`](src/test/java/com/accenture/challenge/PracticeFormSteps.java) | [`PracticeFormPage.java`](src/test/java/com/accenture/challenge/ui/PracticeFormPage.java), [`StudentData.java`](src/test/java/com/accenture/challenge/ui/StudentData.java) e [`practice-form-upload.txt`](src/test/resources/files/practice-form-upload.txt) | [`slide-04-practice-form`](evidencias/slide-04-practice-form/) | `mvn -Dtest=UiFlowTest test` |
-| Slide 5 / `UI-02` | [`05_browser_windows.feature`](src/test/resources/features/05_browser_windows.feature) | [`BrowserWindowsTest.java`](src/test/java/com/accenture/challenge/BrowserWindowsTest.java) | [`PracticeFormSteps.java`](src/test/java/com/accenture/challenge/PracticeFormSteps.java), compartilhado com o Slide 4 | [`BrowserWindowsPage.java`](src/test/java/com/accenture/challenge/ui/BrowserWindowsPage.java) | [`slide-05-browser-windows`](evidencias/slide-05-browser-windows/) | `mvn -Dtest=BrowserWindowsTest test` |
-| Slide 6 / `UI-03` | [`06_web_tables.feature`](src/test/resources/features/06_web_tables.feature) | [`WebTablesRequiredTest.java`](src/test/java/com/accenture/challenge/WebTablesRequiredTest.java) | [`WebTablesSteps.java`](src/test/java/com/accenture/challenge/WebTablesSteps.java) | [`WebTablesPage.java`](src/test/java/com/accenture/challenge/ui/WebTablesPage.java) e [`PersonData.java`](src/test/java/com/accenture/challenge/ui/PersonData.java) | [`slide-06-web-tables`](evidencias/slide-06-web-tables/) e [`DEF-UI-001`](evidencias/slide-06-web-tables/DEF-UI-001-exclusao-em-cascata.md) | `mvn -Dtest=WebTablesRequiredTest test` |
-| Slide 6 / `UI-BONUS-01` | [`06_web_tables.feature`](src/test/resources/features/06_web_tables.feature) | [`WebTablesBonusTest.java`](src/test/java/com/accenture/challenge/WebTablesBonusTest.java) | [`WebTablesSteps.java`](src/test/java/com/accenture/challenge/WebTablesSteps.java) | [`WebTablesPage.java`](src/test/java/com/accenture/challenge/ui/WebTablesPage.java) e [`PersonData.java`](src/test/java/com/accenture/challenge/ui/PersonData.java) | [`R2-EXEC-019`](evidencias/slide-06-web-tables/R2-EXEC-019-automatizada/execucao.md) e [`DEF-UI-001`](evidencias/slide-06-web-tables/DEF-UI-001-exclusao-em-cascata.md) | `mvn -Dtest=WebTablesBonusTest test` |
-| Slide 7 / `UI-04` | [`07_progress_bar.feature`](src/test/resources/features/07_progress_bar.feature) | [`ProgressBarTest.java`](src/test/java/com/accenture/challenge/ProgressBarTest.java) | [`ProgressBarSteps.java`](src/test/java/com/accenture/challenge/ProgressBarSteps.java) | [`ProgressBarPage.java`](src/test/java/com/accenture/challenge/ui/ProgressBarPage.java) | [`R2-EXEC-021`](evidencias/slide-07-progress-bar/R2-EXEC-021-automatizada/execucao.md), [`R2-EXEC-022`](evidencias/slide-07-progress-bar/R2-EXEC-022-automatizada/execucao.md) e [`R2-EXEC-023`](evidencias/slide-07-progress-bar/R2-EXEC-023-automatizada/execucao.md) | `mvn "-Dtest=ProgressBarTest" "-Dexecution.id=R2-EXEC-023" test` |
+### Onde está a automação
+
+| Slide / caso | Feature | Test (runner) | Steps | Page Object / dados |
+|---|---|---|---|---|
+| Slide 3 / `API-01` | [`03_api.feature`](src/test/resources/features/03_api.feature) | [`ApiFlowTest.java`](src/test/java/com/accenture/challenge/ApiFlowTest.java) | [`ApiSteps.java`](src/test/java/com/accenture/challenge/ApiSteps.java) | Não se aplica à API |
+| Slide 3 / `API-PA-01` | Mesmo fluxo de [`03_api.feature`](src/test/resources/features/03_api.feature), executado adicionalmente no Postman | Não se aplica | Não se aplica | Não se aplica |
+| Slide 4 / `UI-01` | [`04_practice_form.feature`](src/test/resources/features/04_practice_form.feature) | [`UiFlowTest.java`](src/test/java/com/accenture/challenge/UiFlowTest.java) | [`PracticeFormSteps.java`](src/test/java/com/accenture/challenge/PracticeFormSteps.java) | [`PracticeFormPage.java`](src/test/java/com/accenture/challenge/ui/PracticeFormPage.java), [`StudentData.java`](src/test/java/com/accenture/challenge/ui/StudentData.java) e [`practice-form-upload.txt`](src/test/resources/files/practice-form-upload.txt) |
+| Slide 5 / `UI-02` | [`05_browser_windows.feature`](src/test/resources/features/05_browser_windows.feature) | [`BrowserWindowsTest.java`](src/test/java/com/accenture/challenge/BrowserWindowsTest.java) | [`PracticeFormSteps.java`](src/test/java/com/accenture/challenge/PracticeFormSteps.java), compartilhado com o Slide 4 | [`BrowserWindowsPage.java`](src/test/java/com/accenture/challenge/ui/BrowserWindowsPage.java) |
+| Slide 6 / `UI-03` | [`06_web_tables.feature`](src/test/resources/features/06_web_tables.feature) | [`WebTablesRequiredTest.java`](src/test/java/com/accenture/challenge/WebTablesRequiredTest.java) | [`WebTablesSteps.java`](src/test/java/com/accenture/challenge/WebTablesSteps.java) | [`WebTablesPage.java`](src/test/java/com/accenture/challenge/ui/WebTablesPage.java) e [`PersonData.java`](src/test/java/com/accenture/challenge/ui/PersonData.java) |
+| Slide 6 / `UI-BONUS-01` | [`06_web_tables.feature`](src/test/resources/features/06_web_tables.feature) | [`WebTablesBonusTest.java`](src/test/java/com/accenture/challenge/WebTablesBonusTest.java) | [`WebTablesSteps.java`](src/test/java/com/accenture/challenge/WebTablesSteps.java) | [`WebTablesPage.java`](src/test/java/com/accenture/challenge/ui/WebTablesPage.java) e [`PersonData.java`](src/test/java/com/accenture/challenge/ui/PersonData.java) |
+| Slide 7 / `UI-04` | [`07_progress_bar.feature`](src/test/resources/features/07_progress_bar.feature) | [`ProgressBarTest.java`](src/test/java/com/accenture/challenge/ProgressBarTest.java) | [`ProgressBarSteps.java`](src/test/java/com/accenture/challenge/ProgressBarSteps.java) | [`ProgressBarPage.java`](src/test/java/com/accenture/challenge/ui/ProgressBarPage.java) |
+
+### Onde está a evidência
+
+| Slide / caso | Pasta de evidência | Última execução | Defeito registrado |
+|---|---|---|---|
+| Slide 3 / `API-01` | [`slide-03-api`](evidencias/slide-03-api/) | [`R2-EXEC-002`](evidencias/slide-03-api/R2-EXEC-002-automatizada/execucao.md) | — |
+| Slide 3 / `API-PA-01` | [`slide-03-api`](evidencias/slide-03-api/) | [`R2-EXEC-005`](evidencias/slide-03-api/R2-EXEC-005-manual/execucao.md) | — |
+| Slide 4 / `UI-01` | [`slide-04-practice-form`](evidencias/slide-04-practice-form/) | [`R2-EXEC-011`](evidencias/slide-04-practice-form/R2-EXEC-011-automatizada/execucao.md) | — |
+| Slide 5 / `UI-02` | [`slide-05-browser-windows`](evidencias/slide-05-browser-windows/) | [`R2-EXEC-012`](evidencias/slide-05-browser-windows/R2-EXEC-012-automatizada/execucao.md) | — |
+| Slide 6 / `UI-03` | [`slide-06-web-tables`](evidencias/slide-06-web-tables/) | [`R2-EXEC-020`](evidencias/slide-06-web-tables/R2-EXEC-020-automatizada/execucao.md) | — |
+| Slide 6 / `UI-BONUS-01` | [`slide-06-web-tables`](evidencias/slide-06-web-tables/) | [`R2-EXEC-019`](evidencias/slide-06-web-tables/R2-EXEC-019-automatizada/execucao.md) | [`DEF-UI-001`](evidencias/slide-06-web-tables/DEF-UI-001-exclusao-em-cascata.md) |
+| Slide 7 / `UI-04` | [`slide-07-progress-bar`](evidencias/slide-07-progress-bar/) | [`R2-EXEC-023`](evidencias/slide-07-progress-bar/R2-EXEC-023-automatizada/execucao.md) | — |
 
 Componentes compartilhados pelos fluxos de interface: [`BasePage.java`](src/test/java/com/accenture/challenge/ui/BasePage.java) e [`NavigationPage.java`](src/test/java/com/accenture/challenge/ui/NavigationPage.java).
 
@@ -110,4 +178,4 @@ Componentes compartilhados pelos fluxos de interface: [`BasePage.java`](src/test
 
 > **Aviso de checkpoint:** ao concluir cada slide, revisar o diff, a rastreabilidade, o resultado real e as evidências. Depois dessa revisão, solicitar autorização de Allan para fazer um commit exclusivo do slide. Não fazer commit ou push automaticamente.
 
-O histórico de execução fica em `RESULTADOS.md`. O estado de implementação e o resumo da última execução ficam em `RASTREABILIDADE.md`.
+O histórico de execução fica em [`RESULTADOS.md`](RESULTADOS.md), e o estado atual dos casos fica em [`RASTREABILIDADE.md`](RASTREABILIDADE.md). As decisões técnicas ficam em [`docs/decisoes/`](docs/decisoes/), o registro da colaboração com IA em [`USO-DE-IA.md`](USO-DE-IA.md) e os commits confirmados em [`CONTROLE-DE-COMMITS.md`](CONTROLE-DE-COMMITS.md).
