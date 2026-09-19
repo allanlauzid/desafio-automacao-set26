@@ -6,8 +6,8 @@
 | API-PA-01 | 3 | Prática adicional | Executar o mesmo fluxo no Postman | As seis respostas e a consulta final ficam comprovadas sem expor segredos | A operação manual pode ocultar um passo ou atribuir a execução à pessoa errada | Executado | Aprovado | R2-EXEC-005 |
 | UI-01 | 4 | Exigência | Preencher e enviar Practice Form com arquivo `.txt`, confirmar e fechar o popup | Popup mostra os dados enviados e deixa de aparecer após o fechamento | O formulário pode aceitar o envio sem refletir corretamente os dados | Implementado | Aprovado | R2-EXEC-011 |
 | UI-02 | 5 | Exigência | Abrir nova janela, validar a mensagem e fechar a janela | Surge uma janela adicional com `This is a sample page` e ela é fechada | A automação pode validar a janela original ou deixar a nova janela aberta | Implementado | Aprovado | R2-EXEC-012 |
-| UI-03 | 6 | Exigência | Criar, editar e excluir o mesmo registro em Web Tables | O registro próprio reflete cada mudança e não aparece após a exclusão | A exclusão pode atingir outra linha ou a edição pode não persistir | Planejado | Não executado | — |
-| UI-BONUS-01 | 6 | Bônus | Criar dinamicamente 12 registros com Cucumber e excluir todos | Os 12 registros coexistem e cada exclusão é verificada | Uma exclusão pode fazer outros registros desaparecerem sem comprovar a exclusão individual | Planejado | Não executado | — |
+| UI-03 | 6 | Exigência | Criar, editar e excluir o mesmo registro em Web Tables | O registro próprio reflete cada mudança e não aparece após a exclusão | A exclusão pode atingir outra linha ou a edição pode não persistir | Implementado | Aprovado | R2-EXEC-020 |
+| UI-BONUS-01 | 6 | Bônus | Criar dinamicamente 12 registros com Cucumber e excluir todos | Os 12 registros coexistem antes da exclusão e nenhum permanece ao final | Uma exclusão pode fazer outros registros desaparecerem sem comprovar a exclusão individual | Implementado | Aprovado com DEF-UI-001 | R2-EXEC-019 |
 | UI-04 | 7 | Exigência | Parar antes de 25%, validar valor até 25%, chegar a 100% e resetar | Valores observados atendem cada estado solicitado | O tempo da interface pode fazer a parada ultrapassar o limite | Planejado | Não executado | — |
 | UI-05 | 8 | Exigência | Reordenar os elementos com drag and drop | A ordem final observada é crescente | O gesto pode mover o item visualmente sem produzir a ordem esperada | Planejado | Não executado | — |
 
@@ -93,3 +93,30 @@
 - Ponto de Selenium que ainda não domino: pendente de informação de Allan.
 
 > **Aviso de commit do Slide 5:** revisar o diff, `R2-EXEC-012`, a rastreabilidade e as evidências. Depois da revisão, Allan deve executar pessoalmente um commit exclusivo do slide e o push. Mensagem sugerida: `test(slide-05): automatizar validacao de nova janela`.
+
+## Decisão aprovada para UI-03 e UI-BONUS-01
+
+- `UI-03` usa e-mail fictício único como chave para criar, conferir, editar e excluir somente o registro do teste.
+- `UI-BONUS-01` gera 12 registros no próprio cenário Cucumber e mantém todos visíveis antes da exclusão.
+- O requisito e o bônus têm runners, relatórios e resultados independentes.
+- A tabela usa 20 linhas por página para manter os 12 registros novos e os três registros padrão na mesma visão.
+- Capturas documentam criação, edição e exclusão no requisito e os estados anterior e posterior à exclusão no bônus.
+- A rotina de encerramento tenta limpar registros remanescentes depois de preservar a evidência de uma falha.
+
+## Registro de uso de IA — checkpoint do Slide 6
+
+- Pedido à IA: implementar e executar o requisito obrigatório e, separadamente, o bônus dos 12 registros.
+- Sugestão ou implementação da IA: cenários Cucumber independentes, Page Object, dados únicos e rastreamento por e-mail.
+- Revisão e compreensão de Allan: pendente de descrição nas palavras de Allan.
+- Ajuste ou teste pessoal de Allan: nenhum informado.
+- Executor do teste: Assistente.
+- `R2-EXEC-013` e `R2-EXEC-014`: Reprovados por localizadores incompatíveis com o DOM semântico atual.
+- `R2-EXEC-015`: requisito obrigatório Aprovado.
+- `R2-EXEC-016` e `R2-EXEC-017`: bônus Reprovado durante a investigação da exclusão em cascata.
+- `R2-EXEC-018`: Reprovado pela asserção técnica que exigia redução de uma linha; o primeiro clique removeu as 12 linhas do teste.
+- `R2-EXEC-019`: bônus Aprovado pelo critério final do slide, com `DEF-UI-001` registrado.
+- `R2-EXEC-020`: regressão do requisito obrigatório Aprovada após a alteração compartilhada.
+- Limitação de ambiente: o aviso CDP 151/Chrome 153 permaneceu sem impedir os cenários.
+- Ponto de Selenium que ainda não domino: pendente de informação de Allan.
+
+> **Aviso de commit do Slide 6:** revisar o diff, as execuções `R2-EXEC-013` a `R2-EXEC-020`, `DEF-UI-001`, a rastreabilidade e as evidências. Depois da revisão, Allan deve executar pessoalmente um commit exclusivo do slide e o push. Mensagem sugerida: `test(slide-06): automatizar operacoes da Web Tables`.

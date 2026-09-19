@@ -28,4 +28,11 @@ public final class NavigationPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//h1[normalize-space()='Browser Windows']")));
     }
+
+    public void openWebTables() {
+        click(By.xpath("//div[contains(@class,'card-body')]/h5[normalize-space()='Elements']"));
+        click(By.xpath("//span[normalize-space()='Web Tables']"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//h1[normalize-space()='Web Tables']")));
+    }
 }

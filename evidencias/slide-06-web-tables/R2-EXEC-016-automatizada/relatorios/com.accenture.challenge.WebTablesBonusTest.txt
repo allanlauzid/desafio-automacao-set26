@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: com.accenture.challenge.WebTablesBonusTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 1, Time elapsed: 68.32 s <<< FAILURE! -- in com.accenture.challenge.WebTablesBonusTest
+Manutenção de registros em Web Tables.Criar e excluir doze registros dinâmicos -- Time elapsed: 67.68 s <<< ERROR!
+org.openqa.selenium.TimeoutException: 
+Expected condition failed: waiting for com.accenture.challenge.ui.WebTablesPage$$Lambda/0x0000017f0134f878@26d24d7a
+(tried for 15 seconds with 500 milliseconds interval)
+Build info: version: '4.47.0', revision: '9175ed9 9175ed94d83e87cc3abeb7c9fd91367d17849d35'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 153.0.8010.47, chrome: {chromedriverVersion: 153.0.8010.52 (78e5e45d4bb4..., userDataDir: C:\Users\Allan\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56208}, goog:processID: 3924, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56208/devtoo..., se:cdpVersion: 153.0.8010.47, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:cmtgKey: true, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: d21af938cfbc896718a589d5a0409688
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:85)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:234)
+	at com.accenture.challenge.ui.WebTablesPage.waitForRow(WebTablesPage.java:93)
+	at com.accenture.challenge.ui.WebTablesPage.delete(WebTablesPage.java:47)
+	at com.accenture.challenge.WebTablesSteps.deleteAllCreatedRecords(WebTablesSteps.java:166)
+	at ✽.excluo todos os registros criados(classpath:features/06_web_tables.feature:20)
+

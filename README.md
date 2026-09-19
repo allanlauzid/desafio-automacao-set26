@@ -53,7 +53,7 @@ mvn -Dtest=UiFlowTest test
 
 No Chrome headless observado, o clique nativo no botão `Close` não alterou o modal. A automação registra essa limitação, usa `Escape` como contingência acessível e só aprova o fechamento após `.modal-content` ficar invisível. O aviso de compatibilidade aproximada CDP 151/Chrome 153 não afetou o cenário, que não depende de comandos CDP.
 
-## Checkpoint atual — Slide 5
+## Checkpoint concluído — Slide 5
 
 O Slide 5 está representado por `UI-02`: acessar `Alerts, Frame & Windows > Browser Windows`, abrir uma nova janela, validar a mensagem `This is a sample page`, fechar a janela secundária e confirmar que somente a original permaneceu aberta.
 
@@ -62,6 +62,19 @@ mvn -Dtest=BrowserWindowsTest test
 ```
 
 Última execução de `UI-02`: `R2-EXEC-012`, Aprovado na primeira tentativa, com 1 cenário, 0 falhas, 0 erros e 0 ignorados. A nova janela é obtida pela diferença entre os conjuntos de identificadores, sem depender de posição fixa.
+
+## Checkpoint atual — Slide 6
+
+O Slide 6 contém o requisito `UI-03` e o bônus `UI-BONUS-01`. O requisito cria, confere, edita, confere novamente e exclui o mesmo registro. O bônus cria 12 registros dinâmicos, compara todos e confirma que nenhum permanece após a exclusão.
+
+```powershell
+mvn -Dtest=WebTablesRequiredTest test
+mvn -Dtest=WebTablesBonusTest test
+```
+
+Última execução de `UI-03`: `R2-EXEC-020`, Aprovado. A primeira aprovação ocorreu em `R2-EXEC-015`; a regressão confirmou o fluxo depois da alteração compartilhada de exclusão.
+
+Última execução de `UI-BONUS-01`: `R2-EXEC-019`, Aprovado com `DEF-UI-001` registrado. Os 12 registros foram criados e validados, mas o primeiro clique de exclusão removeu todas as 12 linhas adicionadas. A ausência final exigida pelo bônus foi confirmada e os três registros padrão permaneceram intactos.
 
 ## Controle por slide
 
