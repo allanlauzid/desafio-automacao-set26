@@ -21,4 +21,11 @@ public final class NavigationPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//h1[normalize-space()='Practice Form']")));
     }
+
+    public void openBrowserWindows() {
+        click(By.xpath("//div[contains(@class,'card-body')]/h5[normalize-space()='Alerts, Frame & Windows']"));
+        click(By.xpath("//span[normalize-space()='Browser Windows']"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//h1[normalize-space()='Browser Windows']")));
+    }
 }

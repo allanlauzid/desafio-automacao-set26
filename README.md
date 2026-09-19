@@ -41,7 +41,7 @@ Os relatórios temporários são produzidos em `target/`. As cópias sanitizadas
 
 A prática adicional `API-PA-01` também foi concluída no Postman Web. `R2-EXEC-003` permanece Bloqueado por Ambiente; `R2-EXEC-004` permanece Reprovado por JSON manual inválido no primeiro passo; e `R2-EXEC-005` foi Aprovado após concluir os seis passos e confirmar os dois ISBNs na consulta final. O executor foi o Assistente via interface do Postman. Senha e token não foram armazenados nas evidências.
 
-## Checkpoint atual — Slide 4
+## Checkpoint concluído — Slide 4
 
 O Slide 4 está representado por `UI-01`: acessar o DemoQA, abrir `Forms > Practice Form`, preencher todos os campos com dados fictícios válidos e aleatórios, anexar o arquivo versionado `practice-form-upload.txt`, submeter, comparar todos os dados do popup e fechá-lo.
 
@@ -52,6 +52,16 @@ mvn -Dtest=UiFlowTest test
 Última execução de `UI-01`: `R2-EXEC-011`, Aprovado, com 1 cenário, 0 falhas, 0 erros e 0 ignorados. As tentativas `R2-EXEC-006` a `R2-EXEC-010` permanecem preservadas como reprovadas por falhas da automação investigadas e corrigidas.
 
 No Chrome headless observado, o clique nativo no botão `Close` não alterou o modal. A automação registra essa limitação, usa `Escape` como contingência acessível e só aprova o fechamento após `.modal-content` ficar invisível. O aviso de compatibilidade aproximada CDP 151/Chrome 153 não afetou o cenário, que não depende de comandos CDP.
+
+## Checkpoint atual — Slide 5
+
+O Slide 5 está representado por `UI-02`: acessar `Alerts, Frame & Windows > Browser Windows`, abrir uma nova janela, validar a mensagem `This is a sample page`, fechar a janela secundária e confirmar que somente a original permaneceu aberta.
+
+```powershell
+mvn -Dtest=BrowserWindowsTest test
+```
+
+Última execução de `UI-02`: `R2-EXEC-012`, Aprovado na primeira tentativa, com 1 cenário, 0 falhas, 0 erros e 0 ignorados. A nova janela é obtida pela diferença entre os conjuntos de identificadores, sem depender de posição fixa.
 
 ## Controle por slide
 

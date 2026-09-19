@@ -5,7 +5,7 @@
 | API-01 | 3 | Exigência | Criar usuário, gerar token, confirmar autorização, listar catálogo, associar dois ISBNs distintos e consultar o usuário em um cenário contínuo | A consulta final retorna o usuário criado com exatamente os dois ISBNs escolhidos | O fluxo pode apresentar sucesso parcial e terminar sem a associação esperada | Implementado | Aprovado | R2-EXEC-002 |
 | API-PA-01 | 3 | Prática adicional | Executar o mesmo fluxo no Postman | As seis respostas e a consulta final ficam comprovadas sem expor segredos | A operação manual pode ocultar um passo ou atribuir a execução à pessoa errada | Executado | Aprovado | R2-EXEC-005 |
 | UI-01 | 4 | Exigência | Preencher e enviar Practice Form com arquivo `.txt`, confirmar e fechar o popup | Popup mostra os dados enviados e deixa de aparecer após o fechamento | O formulário pode aceitar o envio sem refletir corretamente os dados | Implementado | Aprovado | R2-EXEC-011 |
-| UI-02 | 5 | Exigência | Abrir nova janela, validar a mensagem e fechar a janela | Surge uma janela adicional com `This is a sample page` e ela é fechada | A automação pode validar a janela original ou deixar a nova janela aberta | Planejado | Não executado | — |
+| UI-02 | 5 | Exigência | Abrir nova janela, validar a mensagem e fechar a janela | Surge uma janela adicional com `This is a sample page` e ela é fechada | A automação pode validar a janela original ou deixar a nova janela aberta | Implementado | Aprovado | R2-EXEC-012 |
 | UI-03 | 6 | Exigência | Criar, editar e excluir o mesmo registro em Web Tables | O registro próprio reflete cada mudança e não aparece após a exclusão | A exclusão pode atingir outra linha ou a edição pode não persistir | Planejado | Não executado | — |
 | UI-BONUS-01 | 6 | Bônus | Criar dinamicamente 12 registros com Cucumber e excluir todos | Os 12 registros coexistem e cada exclusão é verificada | Uma exclusão pode fazer outros registros desaparecerem sem comprovar a exclusão individual | Planejado | Não executado | — |
 | UI-04 | 7 | Exigência | Parar antes de 25%, validar valor até 25%, chegar a 100% e resetar | Valores observados atendem cada estado solicitado | O tempo da interface pode fazer a parada ultrapassar o limite | Planejado | Não executado | — |
@@ -70,3 +70,26 @@
 - Ponto de Selenium que ainda não domino: pendente de informação de Allan.
 
 > **Aviso de commit do Slide 4:** revisar o diff, as seis tentativas `R2-EXEC-006` a `R2-EXEC-011`, a rastreabilidade e as evidências. Depois da revisão, Allan deve executar pessoalmente um commit exclusivo do slide e o push. Mensagem sugerida: `test(slide-04): automatizar fluxo completo do Practice Form`.
+
+## Decisão aprovada para UI-02
+
+- Um cenário Cucumber cobre navegação, abertura, validação e fechamento da nova janela.
+- O identificador novo é obtido pela diferença entre os conjuntos observados antes e depois do clique.
+- A mensagem é comparada na janela secundária e a captura é anexada antes do fechamento.
+- A validação final confirma o conjunto original de janelas, o foco original e a disponibilidade da página `Browser Windows`.
+- O encerramento do WebDriver no `@After` evita janelas órfãs mesmo em caso de falha.
+
+## Registro de uso de IA — checkpoint UI-02
+
+- Pedido à IA: após aprovação do checkpoint, implementar e executar somente o Slide 5.
+- Sugestão ou implementação da IA: cenário Cucumber com Selenium, Page Object e identificação da nova janela por diferença entre conjuntos.
+- Revisão e compreensão de Allan: pendente de descrição nas palavras de Allan.
+- Ajuste ou teste pessoal de Allan: nenhum informado.
+- Executor do teste: Assistente.
+- Resultado real: `R2-EXEC-012` foi Aprovado na primeira tentativa, com 1 cenário executado, 0 falhas, 0 erros e 0 ignorados.
+- Evidência observável: captura da janela secundária com `This is a sample page`, relatórios Cucumber e relatórios Surefire.
+- Limitação de ambiente: o Selenium 4.47.0 emitiu aviso de correspondência CDP 151 para Chrome 153. O cenário não usa comandos CDP e foi concluído.
+- O resultado histórico do projeto anterior não foi usado como prova desta execução.
+- Ponto de Selenium que ainda não domino: pendente de informação de Allan.
+
+> **Aviso de commit do Slide 5:** revisar o diff, `R2-EXEC-012`, a rastreabilidade e as evidências. Depois da revisão, Allan deve executar pessoalmente um commit exclusivo do slide e o push. Mensagem sugerida: `test(slide-05): automatizar validacao de nova janela`.

@@ -1,5 +1,6 @@
 package com.accenture.challenge;
 
+import com.accenture.challenge.ui.BrowserWindowsPage;
 import com.accenture.challenge.ui.NavigationPage;
 import com.accenture.challenge.ui.PracticeFormPage;
 import com.accenture.challenge.ui.StudentData;
@@ -19,22 +20,30 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PracticeFormSteps {
     private WebDriver driver;
     private Scenario scenario;
     private NavigationPage navigation;
     private PracticeFormPage form;
+    private BrowserWindowsPage browserWindows;
     private StudentData student;
     private long seed;
+    private String originalWindow;
+    private String newWindow;
+    private Set<String> originalHandles;
 
     @Before("@ui")
     public void startBrowser(Scenario scenario) {
@@ -47,14 +56,18 @@ public class PracticeFormSteps {
         driver = new ChromeDriver(options);
         navigation = new NavigationPage(driver);
         form = new PracticeFormPage(driver);
+        browserWindows = new BrowserWindowsPage(driver);
     }
 
     @After("@ui")
     public void stopBrowser(Scenario scenario) {
         if (driver != null) {
             if (scenario.isFailed()) {
+                String evidenceName = scenario.getSourceTagNames().contains("@ui-02")
+                        ? "falha-ui-02"
+                        : "falha-ui-01";
                 scenario.attach(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES),
-                        "image/png", "falha-ui-01");
+                        "image/png", evidenceName);
             }
             driver.quit();
         }
@@ -118,6 +131,55 @@ public class PracticeFormSteps {
     @Entao("o popup deixa de ser exibido")
     public void validatePopupClosed() {
         assertFalse(form.modalVisible(), "O popup permaneceu visível após o fechamento");
+    }
+
+    @Dado("abro Alerts, Frame & Windows e Browser Windows")
+    public void openBrowserWindows() {
+        navigation.openBrowserWindows();
+    }
+
+    @Quando("solicito a abertura de uma nova janela")
+    public void requestNewWindow() {
+        originalWindow = driver.getWindowHandle();
+        originalHandles = Set.copyOf(browserWindows.windowHandles());
+        browserWindows.openNewWindow();
+    }
+
+    @Entao("uma nova janela é aberta")
+    public void validateNewWindow() {
+        browserWindows.waitForWindowCount(originalHandles.size() + 1);
+        Set<String> addedHandles = new HashSet<>(browserWindows.windowHandles());
+        addedHandles.removeAll(originalHandles);
+        assertEquals(1, addedHandles.size(),
+                "Deveria existir exatamente uma nova janela");
+        newWindow = addedHandles.iterator().next();
+        assertNotEquals(originalWindow, newWindow,
+                "A nova janela deve ter um identificador diferente da original");
+        driver.switchTo().window(newWindow);
+    }
+
+    @Entao("apresenta a mensagem {string}")
+    public void validateNewWindowMessage(String expectedMessage) {
+        assertEquals(expectedMessage, browserWindows.message());
+        scenario.attach(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES),
+                "image/png", "nova-janela-ui-02");
+    }
+
+    @Quando("fecho a nova janela")
+    public void closeNewWindow() {
+        assertEquals(newWindow, driver.getWindowHandle(),
+                "O foco deveria estar na nova janela antes de fechá-la");
+        driver.close();
+        driver.switchTo().window(originalWindow);
+    }
+
+    @Entao("apenas a janela original permanece aberta")
+    public void validateOnlyOriginalWindow() {
+        browserWindows.waitForWindowCount(originalHandles.size());
+        assertEquals(originalHandles, browserWindows.windowHandles());
+        assertEquals(originalWindow, driver.getWindowHandle());
+        assertTrue(browserWindows.browserWindowsPageVisible(),
+                "A página Browser Windows deveria continuar disponível na janela original");
     }
 
     private static StudentData generateStudent(long seed) {
