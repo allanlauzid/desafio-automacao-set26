@@ -76,6 +76,23 @@ mvn -Dtest=WebTablesBonusTest test
 
 Última execução de `UI-BONUS-01`: `R2-EXEC-019`, Aprovado com `DEF-UI-001` registrado. Os 12 registros foram criados e validados, mas o primeiro clique de exclusão removeu todas as 12 linhas adicionadas. A ausência final exigida pelo bônus foi confirmada e os três registros padrão permaneceram intactos.
 
+## Mapa rápido dos artefatos por slide
+
+Este é o ponto de entrada para localizar a automação, as evidências e os resultados. `RESULTADOS.md` mantém uma linha por tentativa e aponta para cada `execucao.md`; `RASTREABILIDADE.md` apresenta o estado atual de cada caso.
+
+| Slide / caso | Cenário Cucumber | Runner | Steps | Page Object / dados | Evidências e defeitos | Comando |
+|---|---|---|---|---|---|---|
+| Slide 3 / `API-01` | [`03_api.feature`](src/test/resources/features/03_api.feature) | [`ApiFlowTest.java`](src/test/java/com/accenture/challenge/ApiFlowTest.java) | [`ApiSteps.java`](src/test/java/com/accenture/challenge/ApiSteps.java) | Não se aplica à API | [`slide-03-api`](evidencias/slide-03-api/) | `mvn -Dtest=ApiFlowTest test` |
+| Slide 3 / `API-PA-01` | Mesmo fluxo de `03_api.feature`, executado adicionalmente no Postman | Não se aplica | Não se aplica | Não se aplica | [`R2-EXEC-004`](evidencias/slide-03-api/R2-EXEC-004-manual/execucao.md) e [`R2-EXEC-005`](evidencias/slide-03-api/R2-EXEC-005-manual/execucao.md) | Execução pela interface do Postman |
+| Slide 4 / `UI-01` | [`04_practice_form.feature`](src/test/resources/features/04_practice_form.feature) | [`UiFlowTest.java`](src/test/java/com/accenture/challenge/UiFlowTest.java) | [`PracticeFormSteps.java`](src/test/java/com/accenture/challenge/PracticeFormSteps.java) | [`PracticeFormPage.java`](src/test/java/com/accenture/challenge/ui/PracticeFormPage.java), [`StudentData.java`](src/test/java/com/accenture/challenge/ui/StudentData.java) e [`practice-form-upload.txt`](src/test/resources/files/practice-form-upload.txt) | [`slide-04-practice-form`](evidencias/slide-04-practice-form/) | `mvn -Dtest=UiFlowTest test` |
+| Slide 5 / `UI-02` | [`05_browser_windows.feature`](src/test/resources/features/05_browser_windows.feature) | [`BrowserWindowsTest.java`](src/test/java/com/accenture/challenge/BrowserWindowsTest.java) | [`PracticeFormSteps.java`](src/test/java/com/accenture/challenge/PracticeFormSteps.java), compartilhado com o Slide 4 | [`BrowserWindowsPage.java`](src/test/java/com/accenture/challenge/ui/BrowserWindowsPage.java) | [`slide-05-browser-windows`](evidencias/slide-05-browser-windows/) | `mvn -Dtest=BrowserWindowsTest test` |
+| Slide 6 / `UI-03` | [`06_web_tables.feature`](src/test/resources/features/06_web_tables.feature) | [`WebTablesRequiredTest.java`](src/test/java/com/accenture/challenge/WebTablesRequiredTest.java) | [`WebTablesSteps.java`](src/test/java/com/accenture/challenge/WebTablesSteps.java) | [`WebTablesPage.java`](src/test/java/com/accenture/challenge/ui/WebTablesPage.java) e [`PersonData.java`](src/test/java/com/accenture/challenge/ui/PersonData.java) | [`slide-06-web-tables`](evidencias/slide-06-web-tables/) e [`DEF-UI-001`](evidencias/slide-06-web-tables/DEF-UI-001-exclusao-em-cascata.md) | `mvn -Dtest=WebTablesRequiredTest test` |
+| Slide 6 / `UI-BONUS-01` | [`06_web_tables.feature`](src/test/resources/features/06_web_tables.feature) | [`WebTablesBonusTest.java`](src/test/java/com/accenture/challenge/WebTablesBonusTest.java) | [`WebTablesSteps.java`](src/test/java/com/accenture/challenge/WebTablesSteps.java) | [`WebTablesPage.java`](src/test/java/com/accenture/challenge/ui/WebTablesPage.java) e [`PersonData.java`](src/test/java/com/accenture/challenge/ui/PersonData.java) | [`R2-EXEC-019`](evidencias/slide-06-web-tables/R2-EXEC-019-automatizada/execucao.md) e [`DEF-UI-001`](evidencias/slide-06-web-tables/DEF-UI-001-exclusao-em-cascata.md) | `mvn -Dtest=WebTablesBonusTest test` |
+
+Componentes compartilhados pelos fluxos de interface: [`BasePage.java`](src/test/java/com/accenture/challenge/ui/BasePage.java) e [`NavigationPage.java`](src/test/java/com/accenture/challenge/ui/NavigationPage.java).
+
+Índices de acompanhamento: [`RASTREABILIDADE.md`](RASTREABILIDADE.md) e [`RESULTADOS.md`](RESULTADOS.md).
+
 ## Controle por slide
 
 > **Aviso de checkpoint:** ao concluir cada slide, revisar o diff, a rastreabilidade, o resultado real e as evidências. Depois dessa revisão, solicitar autorização de Allan para fazer um commit exclusivo do slide. Não fazer commit ou push automaticamente.
