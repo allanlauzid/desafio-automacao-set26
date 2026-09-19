@@ -1,0 +1,19 @@
+-------------------------------------------------------------------------------
+Test set: com.accenture.challenge.UiFlowTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 23.20 s <<< FAILURE! -- in com.accenture.challenge.UiFlowTest
+Cadastro de estudante no Practice Form.Enviar o formulário completo e fechar o comprovante -- Time elapsed: 22.32 s <<< ERROR!
+org.openqa.selenium.TimeoutException: 
+Expected condition failed: waiting for title to contain "DEMOQA". Current title: "demosite".
+(tried for 15 seconds with 500 milliseconds interval)
+Build info: version: '4.47.0', revision: '9175ed9 9175ed94d83e87cc3abeb7c9fd91367d17849d35'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '23.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 153.0.8010.47, chrome: {chromedriverVersion: 153.0.8010.52 (78e5e45d4bb4..., userDataDir: C:\Users\Allan\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:56066}, goog:processID: 18048, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:56066/devtoo..., se:cdpVersion: 153.0.8010.47, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:cmtgKey: true, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: c070e2288a9773f3c1cf40c0193c800b
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:85)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:234)
+	at com.accenture.challenge.ui.NavigationPage.openHome(NavigationPage.java:14)
+	at com.accenture.challenge.PracticeFormSteps.accessDemoQa(PracticeFormSteps.java:65)
+	at ✽.que acesso o DemoQA(classpath:features/04_practice_form.feature:6)
+

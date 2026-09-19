@@ -1,0 +1,2 @@
+Arquivo fictício usado pelo cenário UI-01 do Slide 4.
+Não contém dados pessoais ou segredos.

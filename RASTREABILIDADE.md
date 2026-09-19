@@ -4,7 +4,7 @@
 | --- | ---: | --- | --- | --- | --- | --- | --- | --- |
 | API-01 | 3 | Exigência | Criar usuário, gerar token, confirmar autorização, listar catálogo, associar dois ISBNs distintos e consultar o usuário em um cenário contínuo | A consulta final retorna o usuário criado com exatamente os dois ISBNs escolhidos | O fluxo pode apresentar sucesso parcial e terminar sem a associação esperada | Implementado | Aprovado | R2-EXEC-002 |
 | API-PA-01 | 3 | Prática adicional | Executar o mesmo fluxo no Postman | As seis respostas e a consulta final ficam comprovadas sem expor segredos | A operação manual pode ocultar um passo ou atribuir a execução à pessoa errada | Executado | Aprovado | R2-EXEC-005 |
-| UI-01 | 4 | Exigência | Preencher e enviar Practice Form com arquivo `.txt`, confirmar e fechar o popup | Popup mostra os dados enviados e deixa de aparecer após o fechamento | O formulário pode aceitar o envio sem refletir corretamente os dados | Planejado | Não executado | — |
+| UI-01 | 4 | Exigência | Preencher e enviar Practice Form com arquivo `.txt`, confirmar e fechar o popup | Popup mostra os dados enviados e deixa de aparecer após o fechamento | O formulário pode aceitar o envio sem refletir corretamente os dados | Implementado | Aprovado | R2-EXEC-011 |
 | UI-02 | 5 | Exigência | Abrir nova janela, validar a mensagem e fechar a janela | Surge uma janela adicional com `This is a sample page` e ela é fechada | A automação pode validar a janela original ou deixar a nova janela aberta | Planejado | Não executado | — |
 | UI-03 | 6 | Exigência | Criar, editar e excluir o mesmo registro em Web Tables | O registro próprio reflete cada mudança e não aparece após a exclusão | A exclusão pode atingir outra linha ou a edição pode não persistir | Planejado | Não executado | — |
 | UI-BONUS-01 | 6 | Bônus | Criar dinamicamente 12 registros com Cucumber e excluir todos | Os 12 registros coexistem e cada exclusão é verificada | Uma exclusão pode fazer outros registros desaparecerem sem comprovar a exclusão individual | Planejado | Não executado | — |
@@ -43,3 +43,30 @@
 - Ponto de JUnit que ainda não domino: pendente de informação de Allan.
 
 > **Aviso de commit do Slide 3:** depois de revisar o diff, o resultado e as evidências de API-01, solicitar autorização de Allan para criar o commit deste slide. Não incluir trabalho de outros slides no mesmo commit e não fazer push sem pedido explícito.
+
+## Decisão aprovada para UI-01
+
+- Um cenário Cucumber cobre a navegação, o preenchimento completo, o upload, o envio, a conferência do popup e o fechamento.
+- Os dados válidos são fictícios e aleatórios; a seed de cada tentativa é registrada para reprodução.
+- O arquivo `practice-form-upload.txt` faz parte do projeto, conforme exigido pelo slide.
+- Os Page Objects executam ações e leem o estado; as comparações permanecem nos steps.
+- A captura do popup é anexada ao relatório antes do fechamento.
+- O clique no botão `Close` é tentado primeiro. No ambiente headless observado, a contingência com `Escape` foi necessária; a aprovação exige invisibilidade real ao fim da animação.
+
+## Registro de uso de IA — checkpoint UI-01
+
+- Pedido à IA: após aprovação do checkpoint, implementar e executar somente o Slide 4.
+- Sugestão ou implementação da IA: cenário Cucumber com Selenium, dados aleatórios reproduzíveis, Page Objects e evidência do popup.
+- Revisão e compreensão de Allan: pendente de descrição nas palavras de Allan.
+- Ajuste ou teste pessoal de Allan: nenhum informado.
+- Executor do teste: Assistente.
+- `R2-EXEC-006`: Reprovado por oráculo de título desatualizado; nenhum defeito do produto demonstrado.
+- `R2-EXEC-007`: Reprovado após validar os dados, por critério genérico de invisibilidade no fechamento.
+- `R2-EXEC-008`: Reprovado porque o clique nativo não removeu `.modal.show`.
+- `R2-EXEC-009`: Reprovado porque nem o clique nativo nem o evento JavaScript fecharam o modal no Chrome headless.
+- `R2-EXEC-010`: Reprovado por falso negativo durante a animação de saída iniciada por `Escape`.
+- `R2-EXEC-011`: Aprovado com 1 cenário executado, 0 falhas, 0 erros e 0 ignorados; todos os dados foram comparados e o popup ficou invisível após o fechamento.
+- Limitação de ambiente: o Selenium 4.47.0 emitiu aviso de correspondência CDP 151 para Chrome 153. O cenário não usa comandos CDP e foi concluído.
+- Ponto de Selenium que ainda não domino: pendente de informação de Allan.
+
+> **Aviso de commit do Slide 4:** revisar o diff, as seis tentativas `R2-EXEC-006` a `R2-EXEC-011`, a rastreabilidade e as evidências. Depois da revisão, Allan deve executar pessoalmente um commit exclusivo do slide e o push. Mensagem sugerida: `test(slide-04): automatizar fluxo completo do Practice Form`.

@@ -14,12 +14,12 @@ O processo utiliza terminologia do ISTQB e Cucumber, sem apresentar o uso isolad
 - Cucumber descreve todos os fluxos como cenários executáveis.
 - JUnit Platform executa os cenários Cucumber.
 - REST Assured realiza as chamadas da API.
-- Selenium WebDriver será usado nos checkpoints de interface.
-- Page Objects concentrarão interações com a interface; as verificações observáveis ficarão nos steps.
+- Selenium WebDriver realiza os checkpoints de interface.
+- Page Objects concentram interações e leitura de estado; as asserções observáveis ficam nos steps.
 
 O uso de Cucumber é um diferencial do enunciado e uma escolha para toda esta rodada. Um arquivo Gherkin, isoladamente, não comprova um processo colaborativo completo de BDD.
 
-## Checkpoint atual
+## Checkpoint concluído — Slide 3
 
 O Slide 3 está representado por `API-01`: um único cenário Cucumber contínuo que cria um usuário, gera token, confirma autorização, consulta o catálogo, associa dois ISBNs distintos e consulta o usuário com os dois livros.
 
@@ -40,6 +40,18 @@ Os relatórios temporários são produzidos em `target/`. As cópias sanitizadas
 Última execução de `API-01`: `R2-EXEC-002`, Aprovado. A tentativa anterior `R2-EXEC-001` permanece registrada como Bloqueado por configuração.
 
 A prática adicional `API-PA-01` também foi concluída no Postman Web. `R2-EXEC-003` permanece Bloqueado por Ambiente; `R2-EXEC-004` permanece Reprovado por JSON manual inválido no primeiro passo; e `R2-EXEC-005` foi Aprovado após concluir os seis passos e confirmar os dois ISBNs na consulta final. O executor foi o Assistente via interface do Postman. Senha e token não foram armazenados nas evidências.
+
+## Checkpoint atual — Slide 4
+
+O Slide 4 está representado por `UI-01`: acessar o DemoQA, abrir `Forms > Practice Form`, preencher todos os campos com dados fictícios válidos e aleatórios, anexar o arquivo versionado `practice-form-upload.txt`, submeter, comparar todos os dados do popup e fechá-lo.
+
+```powershell
+mvn -Dtest=UiFlowTest test
+```
+
+Última execução de `UI-01`: `R2-EXEC-011`, Aprovado, com 1 cenário, 0 falhas, 0 erros e 0 ignorados. As tentativas `R2-EXEC-006` a `R2-EXEC-010` permanecem preservadas como reprovadas por falhas da automação investigadas e corrigidas.
+
+No Chrome headless observado, o clique nativo no botão `Close` não alterou o modal. A automação registra essa limitação, usa `Escape` como contingência acessível e só aprova o fechamento após `.modal-content` ficar invisível. O aviso de compatibilidade aproximada CDP 151/Chrome 153 não afetou o cenário, que não depende de comandos CDP.
 
 ## Controle por slide
 
